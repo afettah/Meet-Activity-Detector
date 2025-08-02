@@ -1,0 +1,18 @@
+{
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/userinfo.profile"
+  ],
+  "addOns": {
+    "common": {
+      "name": "Meet Activity Detector"
+    },
+    "meet": {
+      "addOnUrlPatterns": [
+        "https://<username>.github.io/Meet-Activity-Detector/*"
+      ],
+      "addOnOrigins": [
+        "https://<username>.github.io"
+      ]
+    }
+  }
+}
