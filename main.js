@@ -1,29 +1,23 @@
-async function initAddon() {
-  try {
-    const session = await google.meet.addons.createAddonSession();
+// Assumes @googleworkspace/meet-addons is loaded globally (via <script> tag or similar)
+// and exposes 'meet' on window.
 
-    const metadataEl = document.getElementById('metadata');
-    const meeting = session.meeting || session.meetingSpace || {};
-    metadataEl.textContent = 'Meeting metadata:\n' + JSON.stringify(meeting, null, 2);
+const CLOUD_PROJECT_NUMBER = "793951466229";
+const MAIN_STAGE_URL = "MAIN_STAGE_URL";
 
-    const userInfoEl = document.getElementById('userinfo');
-    const user = session.currentUser || session.currentParticipant || {};
-    if (user.displayName) {
-      userInfoEl.textContent = `Signed in as ${user.displayName}`;
-    } else if (user.person && user.person.displayName) {
-      userInfoEl.textContent = `Signed in as ${user.person.displayName}`;
-    } else {
-      userInfoEl.textContent = 'User information unavailable';
-    }
-  } catch (err) {
-    console.error('Failed to initialize add-on', err);
-    const metadataEl = document.getElementById('metadata');
-    if (metadataEl) {
-      metadataEl.textContent = 'Failed to initialize add-on.';
-    }
+window.setUpAddon = async function () {
+  if (!window.meet) {
+    console.error("Google Meet Add-ons SDK not loaded.");
+    return;
   }
-}
-
-google.meet.addons.onLoad(() => {
-  initAddon();
-});
+  const session = await window.meet.addon.createAddonSession({
+    cloudProjectNumber: CLOUD_PROJECT_NUMBER,
+  });
+  const sidePanelClient = await session.createSidePanelClient();
+  document
+    .getElementById("start-activity")
+    .addEventListener("click", async () => {
+      await sidePanelClient.startActivity({
+        mainStageUrl: MAIN_STAGE_URL,
+      });
+    });
+};
