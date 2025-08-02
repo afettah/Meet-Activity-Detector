@@ -5,10 +5,7 @@ const app = express();
 const PORT = 5000;
 
 // Accept specific origins and always return 200 for OPTIONS
-const allowedOrigins = [
-  "http://localhost:5000",
-  "https://afettah.github.io"
-];
+const allowedOrigins = ["http://localhost:5000", "https://afettah.github.io"];
 app.use(
   cors({
     origin: function (origin, callback) {
