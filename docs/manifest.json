@@ -1,0 +1,23 @@
+{
+  "addOns": {
+    "common": {
+      "name": "Meet-Activity-Detector",
+      "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcQk_oupIErOYe7t7wjKo7dqKmRkSUNb_6p2qg\u0026s"
+    },
+    "meet": {
+      "web": {
+        "sidePanelUri": "https://afettah.github.io/Meet-Activity-Detector/",
+        "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcQk_oupIErOYe7t7wjKo7dqKmRkSUNb_6p2qg\u0026s",
+        "addOnOrigins": [
+          "https://afettah.github.io",
+          "https://meet.google.com",
+          "http://localhost:5000"
+        ],
+        "darkModeLogoUrl": "https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcQk_oupIErOYe7t7wjKo7dqKmRkSUNb_6p2qg\u0026s"
+      }
+    },
+    "httpOptions": {
+      "granularOauthPermissionSupport": "OPT_IN"
+    }
+  }
+}

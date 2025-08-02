@@ -12,30 +12,26 @@ window.setUpAddon = async function () {
     cloudProjectNumber: CLOUD_PROJECT_NUMBER,
   });
   const sidePanelClient = await session.createSidePanelClient();
-  document
-    .getElementById("start-activity")
-    .addEventListener("click", async () => {
-      // Get current user info
-      let userInfo;
-      try {
-        userInfo = await session.getUser();
-        console.log("Current user info:", userInfo);
-      } catch (e) {
-        console.error("Failed to get user info:", e);
-      }
+  // Auto-execute activity logic on add-on load
+  let userInfo;
+  try {
+    userInfo = session.user;
+    console.log("Current user info:", userInfo);
+  } catch (e) {
+    console.error("Failed to get user info:", e);
+  }
 
-      // Call localhost service on port 5000
-      try {
-        await fetch("http://localhost:5000/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user: userInfo }),
-        });
-        console.log("Request sent to localhost:5000");
-      } catch (err) {
-        console.error("Failed to call localhost service:", err);
-      }
+  // Call localhost service on port 5000
+  try {
+    await fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: userInfo }),
     });
+    console.log("Request sent to localhost:5000");
+  } catch (err) {
+    console.error("Failed to call localhost service:", err);
+  }
 };
